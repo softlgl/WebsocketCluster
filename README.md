@@ -1,7 +1,7 @@
 # WebsocketCluster
 ### asp.net core websocket集群示例
 本示例可以构建一个websocket集群，具体涉及和实现思路可以参考[https://www.cnblogs.com/wucy/p/16857160.html](https://www.cnblogs.com/wucy/p/16857160.html)
-基于这份思路作者还构建了golang版本的实现，设计思路和实现方式是完全一致的，因此这两份代码可以加入到一个集群内,可跳转至[golang版本实现](https://github.com/softlgl/websocket-cluster)下载源码，构建集群测试
+基于这份思路作者还构建了`golang`版本的实现，设计思路和实现方式是完全一致的，因此这两份代码可以加入到一个集群内,可跳转至[golang版本实现](https://github.com/softlgl/websocket-cluster)下载源码，构建集群测试
 + asp.net core版本`Microsoft.AspNetCore.App 6.0.10`
 + 开发环境`visual studio 2022`
 
