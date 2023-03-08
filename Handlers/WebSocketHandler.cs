@@ -107,7 +107,13 @@ namespace WebsocketCluster.Handlers
                 }
             }
 
+            await _lock.WaitAsync();
             _ = currentGroup.TryRemove(userId, out _);
+            if (currentGroup.Count == 0)
+            {
+                _redisClient.UnSubscribe($"{groupPrefix}{groupId}");
+            }
+            _lock.Release();
             await webSocket.CloseAsync(receiveResult.CloseStatus.Value, receiveResult.CloseStatusDescription, CancellationToken.None);
         }
 
@@ -145,7 +151,15 @@ namespace WebsocketCluster.Handlers
                 }
             }
 
-            _ = UserConnection.TryRemove(id, out _);
+            await _lock.WaitAsync();
+
+            _ = AllConnection.TryRemove(id, out _);
+            if (AllConnection.Count == 0)
+            {
+                _redisClient.UnSubscribe(all);
+            }
+
+            _lock.Release();
             await webSocket.CloseAsync(receiveResult.CloseStatus.Value, receiveResult.CloseStatusDescription, CancellationToken.None);
             //_disposables.TryRemove($"{userPrefix}{id}", out var disposable);
             //disposable.Dispose();
